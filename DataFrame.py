@@ -3,7 +3,7 @@ import pandas as pd
 from pyspark.sql import SparkSession
 from pyspark.sql import Row
 
-spark = SparkSession.builder.getOrCreate()
+spark = SparkSession.builder.appName("Dataframe Example").getOrCreate()
 
 df = spark.createDataFrame([
     Row(a=1, b=2., c='string1', d=date(2000, 1, 1), e=datetime(2000, 1, 1, 12, 0)),
@@ -13,3 +13,10 @@ df = spark.createDataFrame([
 
 print(df)
 
+mtcars = spark.read.csv("mtcars.csv")
+print(mtcars)
+
+mtcars = spark.read.option('header', 'true').csv("mtcars.csv")
+print(mtcars)
+
+mtcars.printSchema()
