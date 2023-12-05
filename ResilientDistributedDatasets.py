@@ -19,4 +19,10 @@ threes.count()
 result = threes.collect()
 print(result)
 
+# some basic calculations on the original RDD
+print(rdd.count())
+print(rdd.max())
+print(rdd.min())
+print(rdd.mean())
+
 sc.stop()
