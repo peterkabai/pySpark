@@ -20,3 +20,16 @@ mtcars = spark.read.option('header', 'true').csv("mtcars.csv")
 print(mtcars)
 
 mtcars.printSchema()
+
+print(" *** Spark SQL Section *** ")
+# Some Spark SQL operations on the mtcars df
+gearGroups = mtcars.groupby('gear').count()
+gearGroups.show()
+
+withSum = mtcars.join(gearGroups, 'gear', 'inner')
+withSum.show()
+
+# filter meathod: requires a confition and returns a boolean
+withSum.filter(withSum.gear == 3).show()
+
+withSum.filter(withSum.gear == 3).select("model", "gear").show()
